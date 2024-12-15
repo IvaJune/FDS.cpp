@@ -1,0 +1,975 @@
+------------------------------------------------------------------------------------
+01: Write a Python program to store marks scored in subject “Fundamental of
+Data Structure” by N students in the class. Write functions to compute
+following:
+a) The average score of class
+b) Highest score and lowest score of class
+c) Count of students who were absent for the test
+d)Display mark with highest frequency
+
+def sum():
+    sum = 0
+    totalstudents = 0
+    for i in range(n):
+        sum = sum + marks[i]
+        totalstudents += 1
+    print("Total Marks: ", sum)
+    average = sum / totalstudents
+    return average
+    
+def maximum():
+    max = 0
+    for i in range(n):
+        if(marks[i]>max):
+            max = marks[i]
+    return max
+
+def minimum():
+    min = 999
+    for i in range(n):
+        if(marks[i]<min and marks[i] > 0):
+            min = marks[i]
+    return min
+
+def count():
+    cnt = 0 
+    for i in range(n):
+        if (marks[i] == -1):
+            cnt += 1
+    return cnt
+    
+print("--------MARKS IN FDS---------")
+marks = []
+n = int(input("Enter total number of students: "))
+
+for i in range(n):
+    m = int(input("Enter Marks of Students: "))
+    marks.append(m)
+print()
+
+print("------------------------------------")
+average_data = sum()
+print("Average Score of Class: ", average_data)
+print("------------------------------------")
+
+max_score = maximum()
+print("Maximum Score from Class: ", max_score)
+print("------------------------------------")
+
+min_score = minimum()
+print("Minimum Score from Class: ", min_score)
+print("------------------------------------")
+
+absent_students = count()
+print("Total Absent Students: ", absent_students)
+print("------------------------------------")
+
+------------------------------------------------------------------------------
+
+02: Write a Python program that computes the net amount of a bank account
+based a transaction log from console input. The transaction log format is
+shown as following: D 100 W 200 (Withdrawal is not allowed if balance is
+going negative. Write functions for withdraw and deposit) D means deposit
+while W means withdrawal.
+Suppose the following input is supplied to the program:
+D 300, D 300 , W 200, D 100 Then, the output should be: 500
+
+balance = 0
+
+def deposit(balance):
+    amount = int(input("Enter the amount to deposit: "))
+    balance = balance + amount
+    
+    print("Your Updated Balance After Deposit is: ", balance)
+    return balance
+    
+def withdraw(balance):
+    amount = int(input("Enter amount to you wish to withdraw: "))
+    if (amount <= 0):
+        print("Insufficient Balance!")
+    else:
+        balance = balance - amount
+        print("Your Updated Balance After Withdrawal is: ", balance)
+    return balance
+
+while(True):
+    print("--------------------------------------")
+    print("Your Current Balance is: ", balance)
+    print("------------------------------------------")
+    print("Enter 'd' : Deposit | 'w' : Withdrawal: ")
+    choice = input("Enter your Choice: ")
+    print("------------------------------------------")
+
+
+    if (choice == 'd'):
+        print("--------DEPOSIT PROCESS--------")
+        balance = deposit(balance)
+    elif (choice == 'w'):
+        print("--------WITHDRAW PROCESS-------")
+        balance = withdraw(balance)
+    else:
+        print("Invalid input!")
+    
+---------------------------------------------------------------------------------------------------
+03: Write a Python program to compute following computation on matrix:
+a) Addition of two matrices
+B) Subtraction of two matrices
+c) Multiplication of two matrices
+d) Transpose of a matrix
+
+#NOT WORKING - ERROR IN LOOP WHILE PRINTING INVALID INPUT
+def Addition():
+    print("--------------------------------")
+    sum = 0
+    for i in range(row):
+        for j in range(col):
+            sum = sum + (mat1[i][j] + mat2[i][j])
+            print(sum, end=" ")
+        print()
+    print("--------------------------------")
+
+def Subtraction():
+    print("--------------------------------")
+    sum = 0
+    for i in range(row):
+        for j in range(col):
+            sum = sum + (mat1[i][j] - mat2[i][j])
+            print(sum, end=" ")
+        print()
+    print("--------------------------------")
+
+def Multiplication():
+    print("--------------------------------")
+    if(r == c):
+        for i in range(row):
+            for j in range(col):
+                sum = 0
+                for k in range(col):
+                    sum = sum + (mat1[i][k] * mat2[k][j])
+                print(sum, end=" ")
+            print()
+    else:
+        print("Invalid operation!")
+    print("--------------------------------")
+    
+def Transpose_mat1():
+    print("--------------------------------")
+    for i in range(row):
+        trans = 0
+        for j in range(col):
+            print(mat1[j][i], end = " ")
+        print()
+    print("--------------------------------")
+    
+def Transpose_mat2():
+    print("--------------------------------")
+    for i in range(row):
+        trans = 0
+        for j in range(col):
+            print(mat2[j][i], end = " ")
+        print()
+    print("--------------------------------")
+    
+
+mat1 = []
+mat2 = []
+
+#for mat1
+row = int(input("Enter number of Rows for Matrix 1: "))
+col = int(input("Enter number of Columns for Matrix 1: "))
+
+
+for r in range(row):
+    a = []
+    for c in range(col):
+        m = int(input("Enter Matrix elements: "))
+        a.append(m)
+    mat1.append(a)
+    
+print("Matrix 1: ")
+for i in range(row):
+    for j in range(col):
+        
+        print(mat1[i][j], end=" ")
+    print()
+    
+#for mat2
+row = int(input("Enter number of rows for matrix 2: "))
+col = int(input("Enter number of columns for matrix 2: "))
+
+for r in range(row):
+    b = []
+    for c in range(col):
+        m = int(input("Enter Matrix 2 Elements: "))
+        b.append(m)
+    mat2.append(b)
+    
+#printing mat2
+print("Matrix 2: ")
+for i in range(row):
+    for j in range(col):
+        print(mat2[i][j], end=" ")
+    print()
+
+print("Enter 1 : Addition")
+print("Enter 2 : Multiplication")
+print("Enter 3 : Subtraction")
+print("Enter 4 : Transpose of Matrix 1 ")
+print("Enter 5 : Transpose of Matrix 2 ")
+choice = int(input("Enter your choice: "))
+
+conditn = False
+while(True):
+
+    print("Enter 1 : Addition")
+    print("Enter 2 : Multiplication")
+    print("Enter 3 : Subtraction")
+    print("Enter 4 : Transpose of Matrix 1 ")
+    print("Enter 5 : Transpose of Matrix 2 ")
+    choice = int(input("Enter your choice: "))
+    
+    
+    if(choice == 1):
+        print("Addition of Two Matrices: ")
+        Addition()
+        conditn = True
+    elif (choice == 2):
+        print("MUltiplication of Two Matrices: ")
+        Multiplication()
+        conditn = True
+    elif (choice == 3):
+        print("Subtraction of Two Matrices : ")
+        Subtraction()
+        conditn = True
+    elif (choice == 4):
+        print("Transpose of Matrix 1: ")
+        Transpose_mat1()
+        conditn = True
+    elif (choice == 5):
+        print("Transpose of Two Matrices: ")
+        Transpose_mat2()
+        conditn = True
+    else:
+        print("Invalid Input!")
+        break
+    
+-------------------------------------------------------------------------------------------------
+04: Write a Python program to store first year percentage of students in array.
+Write function for sorting array of floating point numbers in ascending order
+using
+a) Selection Sort
+b) Bubble sort and display top five scores
+
+def BubbleSort(marks, n):
+    for i in range(n):
+        for j in range(n-i-1):
+            if (marks[j] > marks[j+1]):
+                temp = marks[j]
+                marks[j] = marks[j+1]
+                marks[j+1] = temp
+    return marks
+
+def SelectionSort(marks, n):
+    for i in range(n):
+        min = i
+        for j in range(i+1, n):
+            if (marks[j] < marks[min]):
+                min = j
+        marks[i], marks[min] = marks[min], marks[i]
+    return marks
+            
+def TopFiveScores():
+    print(marks[-1:-6:-1], end=" ")
+    
+        
+        
+n = int(input("Enter Size of Array: "))
+marks = []
+
+for i in range(n):
+    m = float(input("Enter Array elements: "))
+    marks.append(m)
+print(marks, end= " ")
+print()
+
+# print("Enter 1: Bubble Sort")
+# print("Enter 2: Selection Sort")
+# choice = int(input("Enter Choice: "))
+
+swapped = False
+
+while(True):
+    print("Enter 1: Bubble Sort")
+    print("Enter 2: Selection Sort")
+    choice = int(input("Enter Choice: "))
+    
+    if ((choice == 1)):
+        print("Bubble Sort Array Result: ")
+        BubbleSort(marks, n)
+        print(marks, end=" ")
+        swapped = True
+        print("Top Five scores in Sorted Score Array: ")
+        TopFiveScores()
+        
+        
+        print()
+        
+    elif (choice == 2):
+        print("Selection Sort Array Result: ")
+        SelectionSort(marks, n)
+        
+        swapped= True
+        print("Top Five scores in Sorted Score Array: ")
+        
+        TopFiveScores()
+        
+        
+        print()
+        
+    else:
+        print("Invalid input")
+        break
+ --------------------------------------------------------------------------------------------
+
+05: Write a Python program to store second year percentage of students in array.
+Write function for sorting array of floating point numbers in ascending order
+using
+a) Insertion sort
+b) Shell Sort and display top five scores
+
+def Insertion(marks):
+    for i in range(1, n):
+        temp = marks[i]
+        j = i-1
+        while ( j>=0 and marks[j]>temp):
+            marks[j+1] = marks[j]
+            j-=1
+        marks[j+1] = temp
+        return marks
+    
+def Shell(marks):
+    d = n//2
+    for i in range(d, n):
+        temp = marks[i]
+        j = i
+        while( (j >= d) and (marks[j-1] > temp)):
+            marks[j] = marks[j-d]
+            j = j - d
+        marks[j] = temp
+    d//=2
+    return marks
+    
+
+
+marks = []
+
+n = int(input("Enter Size of Array: "))
+
+for i in range(n):
+    m = int(input("Enter Array Elements: "))
+    marks.append(m)
+print(marks, end=" ")
+
+print("Enter 1: Insertion Sort")
+print("Enter 2: Shell Sort")
+choice = int(input("Enter Choice: "))
+
+swapped = False
+while(True):
+    if (choice == 1):
+        Insertion(marks)
+        print("Sorted array using Inserted Sort: ")
+        print(marks, end=" ")
+        swapped = True
+    elif (choice==2):
+        Shell(marks)
+        print("Sorted array using Shell Sort: ")
+        print(marks, end=" ")
+        swapped = False
+    else:
+        print("Invalid input")
+        break
+    print("Enter 1: Insertion Sort")
+    print("Enter 2: Shell Sort")
+    choice = int(input("Enter Choice: "))
+-------------------------------------------------------------------------------
+06: Write a python program to store first year percentage of students in array.
+Write function for sorting array of floating point numbers in ascending order
+using quick sort and display top five scores.
+
+def partition(arr, s, e):
+    pivot = arr[s]
+    i = s
+    j = e
+    while(i<j):
+        while(arr[i] <= pivot):
+            i += 1
+        while(arr[j] > pivot):
+            j -= 1
+        if ( i<j ):
+            temp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = temp
+    
+    temp = arr[j]
+    arr[j] = arr[s]
+    arr[s] = temp
+    
+    return j
+
+def QuickSort(arr, s, e):
+    if (s<e):
+        p = partition(arr, s, e)
+        
+        QuickSort(arr, s, p-1)
+        QuickSort(arr, p+1, e)
+
+arr = []
+n = int(input("Enter Size of Array: "))
+
+for i in range(n):
+    m = int(input("Enter array elements: "))
+    arr.append(m)
+print(arr, end=" ")
+
+print("Sorted array: ")
+QuickSort(arr, 0, n-1)
+print(arr, end=" ")
+
+-----------------------------------------------------------------------------------------------
+07: Department of Computer Engineering has student's club named 'Pinnacle Club'.
+Students of second, third and final year of department can be granted
+membership on request. Similarly one may cancel the membership of club. First
+node is reserved for president of club and last node is reserved for secretary of
+club. Write C++ program to maintain club member‘s information using singly
+linked list. Store student PRN and Name. Write functions to:
+a) Add and delete the members as well as president or even secretary.
+b) Compute total number of members of club
+c) Display members
+d) Two linked lists exists for two divisions. Concatenate two lists
+
+#include <iostream>
+using namespace std;
+
+struct Node{
+    string name;
+    int prn;
+    Node* next;
+    
+    Node(){
+    }
+    
+    Node(string name, int prn){
+        this -> name = name;
+        this -> prn = prn;
+        this -> next = NULL;
+    }
+    
+    ~Node(){
+        cout<<"Memory free !!";
+    }
+};
+
+void Insert(Node* &head, Node* tail,string name, int prn, int position){
+    if (position == 1){
+        Node* temp = new Node(name, prn);
+        temp -> next = head;
+        head = temp;
+    }
+    
+    else if(position == 2){
+        Node* temp = new Node(name, prn);
+        tail -> next = temp;
+        temp = tail;
+    }
+    
+    else if(position == 3){
+        
+        Node* temp = head;
+        int cnt = 1;
+        while(cnt < (position-1)){
+            cnt++;
+            temp = temp -> next;
+        }
+        
+        Node* NodetoInsert = new Node(name, prn);
+        NodetoInsert -> next = temp -> next;
+        temp -> next = NodetoInsert;
+    }
+}
+
+
+void Delete(Node* &head, Node* tail, int position){
+    if (position == 1){
+        Node* temp = head;
+        head = head -> next;
+        temp -> next = NULL;
+        delete temp;
+    }
+    else{
+        Node* prev = NULL;
+        Node* curr = tail;
+        int cnt = 1;
+        while (cnt < (position-1)){
+            cnt++;
+            prev = curr;
+            curr = curr -> next;
+        }
+        prev -> next = curr -> next;
+        curr -> next = NULL;
+        delete curr;
+        
+    }
+}
+
+void display(Node* &head1){
+    Node* temp = head1;
+    while (temp != NULL){
+        cout<<temp->name<<" "<<temp->prn<<" | ";
+        temp = temp -> next;
+    }cout<<endl;
+}
+void display2(Node* &head){
+    Node* temp = head;
+    while (temp != NULL){
+        cout<<temp->name<<" "<<temp->prn<<" | ";
+        temp = temp -> next;
+    }cout<<endl;
+}
+
+Node* concatenate(Node* head1, Node* tail1, Node* head2, Node* tail2){
+    Node* temp = head1;
+    if (head1 == NULL){
+        return head2;
+    }
+    while (temp -> next != NULL){
+        temp = temp -> next;  
+    }
+    temp -> next = head2;
+    
+}
+
+int main(){
+    cout<<"LINKED LIST 1: "<<endl;
+    Node* node1 = new Node("Vedika", 2);
+    // Node* node2 = new Node("Kumud", 16);
+    
+    Node* head1 = node1;
+    Node* tail1 = node1;
+    
+    display(head1);
+    Insert(head1, tail1, "Kumud", 4, 2);
+    display(head1);
+    
+    Insert(head1, tail1, "Addu", 1, 1);
+    display(head1);
+    
+    Insert(head1, tail1, "Tina", 3, 3);
+    display(head1);
+    
+    Delete(head1, tail1, 3);
+    display(head1);
+    
+    cout<<"LINKED LIST 2: "<<endl;
+    Node* node2 = new Node("Naman", 6);
+    Node* head2 = node2;
+    Node* tail2 = node2;
+    
+    Insert(head2, tail2, "Arjun", 8, 2);
+    display(head2);
+    
+    Insert(head2, tail2, "Karan", 5, 1);
+    display(head2);
+    
+    Insert(head2, tail2, "Raju", 7, 3);
+    display(head2);
+    
+    cout<<"Concatenation of two linked lists: "<<endl;
+    concatenate(head1, tail1, head2, tail2);
+    display(head1);
+    return 0;
+}
+---------------------------------------------------------------------------------------------
+8: 
+----------------------------------------------------------------------------------------------
+9:
+----------------------------------------------------------------------------------------------
+10:
+----------------------------------------------------------------------------------------------
+11: Queues are frequently used in computer programming, and a typical example
+is the creation of a job queue by an operating system. If the operating system
+does not use priorities, then the jobs are processed in the order they enter the
+system. Write C++ program for simulating job queue. Write functions to add
+job and delete job from queue.
+
+#include <iostream>
+using namespace std;
+
+class Queue{
+    int* arr;
+    int size;
+    int front, rear;
+    
+    public:
+        Queue(){
+            size = 5;
+            arr = new int[size];
+            
+            for(int i = 0; i<size; i++){
+                arr[i] = 0;
+                cout<<arr[i]<<" ";
+            }
+            cout<<endl;
+            front = rear = -1;
+        }
+        
+        bool is_empty(){
+            if (front == -1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        
+        bool is_full(){
+            if (rear == (size-1)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        
+        void enqueue(int element){
+            //check if full
+            if (is_full()){
+                cout<<"Queue is Full"<<endl;
+                return;
+            }
+            else if (rear == -1 && front == -1){
+                front = rear = 0;
+            }
+            else{
+                rear++;
+            }
+            arr[rear] = element;
+        }
+        
+        void dequeue(){
+            //check if empty
+            if (is_empty()){
+                return;
+            }
+            arr[front] = -1;
+            if (front == rear){
+                front = rear = -1;
+            }
+            else{
+                front++;
+            }
+        }
+        
+        void display(){
+            if (is_empty()){
+                cout<<"Queue is Empty!"<<endl;
+                return;
+            }
+            for (int i = front; i <= rear; i++){
+                cout<<arr[i]<<" ";
+            }
+            cout<<endl;
+        }
+};
+
+int main(){
+    Queue obj;
+    
+    obj.display();
+    
+    obj.enqueue(5);
+    obj.display();
+    
+    obj.enqueue(6);
+    obj.display();
+    
+    obj.enqueue(7);
+    obj.display();
+    
+    obj.enqueue(8);
+    obj.display();
+    
+    obj.enqueue(9);
+    obj.display();
+    
+    obj.enqueue(15);
+    obj.display();
+    
+    obj.dequeue();
+    obj.display();
+    return 0;
+}
+---------------------------------------------------------------------------------------------------
+12: A double-ended queue (deque) is a linear list in which additions and deletions may
+be made at either end. Obtain a data representation mapping a deque into a
+onedimensional array. Write C++ program to simulate deque with functions to add
+and delete elements from either end of the deque
+
+#include <iostream>
+using namespace std;
+
+class Deque{
+    int* arr;
+    int size;
+    int front;
+    int rear;
+    
+    public:
+        Deque(){
+            size = 6;
+            arr = new int[size];
+            cout<<"Original Deque: "<<endl;
+            for (int i=0; i<size;i++){
+                arr[i] = 0;
+                cout<<arr[i]<<" ";
+            }cout<<endl;
+            front = rear = -1;
+        }
+        
+        int push_back(int element){
+            //check if full
+            if ((rear+1) % size == front){
+                cout<<"Deque is Full!"<<endl;
+                return false;
+            }
+            //single element
+            else if(rear == -1){
+                rear = front = 0;  
+            }
+            
+            else{
+                rear = (rear+1) %size;
+            }
+            arr[rear] = element;
+            return true;
+        }
+        
+        int push_front(int element){
+            //check if empty
+            if( (rear+1) % size == front){
+                return false;
+            }
+            //single element
+            else if(front == -1){
+                front = rear = 0;
+            }
+            
+            else{
+                front = (front - 1 + size) % size;
+            }
+            arr[front] = element;
+            return true;
+        }
+        
+        int pop_front(){
+            //check if empty
+            if(front==-1){
+                return false;
+            }
+            int ans = arr[front];
+            arr[front] = 0;
+            if(front == rear){
+                front = rear = -1;
+            }
+            else{
+                // front--;
+                front = (front + 1) % size;
+            }
+            return ans;
+        }
+        
+        int pop_back(){
+            //check if empty
+            if (front==-1){
+                return false;
+                
+            }
+            int ans = arr[rear];
+            arr[rear] = 0;
+            if(rear == front){
+                front = rear = -1;
+            }
+            
+            else{
+                rear = (rear-1 + size) % size;
+            }
+            return ans;
+        }
+        
+        void display(){
+            if (front == -1){
+                cout<<"Queue is Empty"<<endl;
+                return;
+            }
+            
+            int i = front;
+            while(true){
+                cout<<arr[i]<<" ";
+                if (i==rear) break;
+                i = (i+1) % size;
+            }
+            cout<<endl;
+        }
+};
+
+int main(){
+    Deque obj;
+    
+    obj.display();
+    
+    obj.push_front(5);
+    obj.display();
+    
+    obj.push_front(4);
+    obj.display();
+    
+    obj.push_back(6);
+    obj.display();
+    
+    obj.pop_front();
+    obj.display();
+    
+    obj.push_front(14);
+    obj.display();
+    
+    obj.push_back(3);
+    obj.display();
+    
+    obj.pop_back();
+    obj.display();
+    return 0;
+}
+-----------------------------------------------------------------------------------------------------
+13: Pizza parlor accepting maximum M orders. Orders are served in first come
+first served basis. Order once placed cannot be cancelled. Write C++ program
+to simulate the system using circular queue using array
+
+#include <iostream>
+using namespace std;
+
+class Queue{
+    int* arr;
+    int size;
+    int front;
+    int rear;
+    
+    public:
+        Queue(){
+            size = 5;
+            arr = new int[size];
+            cout<<"Original Queue: "<<endl;
+            for(int i=0; i<size; i++){
+                arr[i] = 0;
+                cout<<arr[i]<<" ";
+            }cout<<endl;
+            front = rear = -1;
+        }
+        
+        
+        int enqueue(int element){
+            //check if full
+            if ((rear+1)%size == front){
+                cout<<"Queue is Full!"<<endl;
+            }
+            //single element
+            else if(front == -1 && rear == -1){
+                front = rear = 0;
+            }
+            // else if(rear == (size-1) && front != 0){
+            //     rear = 0;
+            // }
+            else{
+                rear = (rear+1) % size;
+                
+            }
+            arr[rear] = element;
+            
+        }
+        
+        int dequeue(){
+            //check if empty
+            if (front == -1){
+                //cout<<"Queue is Empty"<<endl;
+                return false;
+
+            }
+            int ans = arr[front];
+            arr[front] = -1;
+            if(front == rear){
+                front = rear = -1;
+            }
+            else if(front == (size-1)){
+                front = 0;
+            }
+            else{
+                front++;
+            }
+            return ans;
+        }
+        
+        void display(){
+            if (front == -1 && rear == -1){
+                //cout<<"Queue is Empty"<<endl;
+                return;
+            }
+            int i = front;
+            while(true){
+                cout<<arr[i]<<" ";
+                if (i == rear){
+                    break;
+                }
+                i = (i+1) % size;
+            }
+            cout<<endl;
+        }
+};
+
+int main(){
+    Queue obj;
+    
+    
+    obj.display();
+    
+    cout<<"After Enqueue: "<<endl;
+    obj.enqueue(5);
+    obj.display();
+    
+    cout<<"After Enqueue: "<<endl;
+    obj.enqueue(6);
+    obj.display();
+    
+    cout<<"After Enqueue: "<<endl;
+    obj.enqueue(7);
+    obj.display();
+    
+    cout<<"After Enqueue: "<<endl;
+    obj.enqueue(8);
+    obj.display();
+    
+    cout<<"After Enqueue: "<<endl;
+    obj.enqueue(9);
+    obj.display();
+    
+    cout<<"After Dequeue: "<<endl;
+    obj.dequeue();
+    obj.display();
+    
+    cout<<"After Dequeue: "<<endl;
+    obj.dequeue();
+    obj.display();
+    
+    cout<<"After Enqueue: "<<endl;
+    obj.enqueue(6);
+    obj.display();
+    return 0;
+}
