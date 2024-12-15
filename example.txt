@@ -852,7 +852,62 @@ int main() {
 }
 
 ----------------------------------------------------------------------------------------------
-10:
+10:#include <iostream>
+using namespace std;
+
+#define MAX 100 // Maximum size of the stack
+
+// Function to check if the expression is balanced
+bool isBalanced(string expression) {
+    char stack[MAX]; // Array to simulate stack
+    int top = -1;    // Initialize stack top
+
+    // Iterate through each character in the expression
+    for (char ch : expression) {
+        // Push opening brackets onto the stack
+        if (ch == '(' || ch == '{' || ch == '[') {
+            if (top < MAX - 1) { // Check if stack is not full
+                stack[++top] = ch; // Push the opening bracket
+            } else {
+                cout << "Stack Overflow" << endl; // Handle overflow
+                return false;
+            }
+        }
+        // For closing brackets
+        else if (ch == ')' || ch == '}' || ch == ']') {
+            // Check if stack is empty
+            if (top == -1) {
+                return false; // No matching opening bracket
+            }
+            // Check if the closing bracket matches the top of the stack
+            char topChar = stack[top--]; // Pop the top element
+            if ((ch == ')' && topChar != '(') ||
+                (ch == '}' && topChar != '{') ||
+                (ch == ']' && topChar != '[')) {
+                return false; // Mismatch found
+            }
+        }
+    }
+
+    // At the end, check if the stack is empty (all brackets matched)
+    return top == -1;
+}
+
+int main() {
+    string expression;
+    cout << "Enter an expression: ";
+    getline(cin, expression); // Read the entire line
+
+    // Check if the expression is balanced and display the result
+    if (isBalanced(expression)) {
+        cout << "The expression is well parenthesized." << endl;
+    } else {
+        cout << "The expression is not well parenthesized." << endl;
+    }
+
+    return 0;
+}
+
 ----------------------------------------------------------------------------------------------
 11: Queues are frequently used in computer programming, and a typical example
 is the creation of a job queue by an operating system. If the operating system
