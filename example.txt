@@ -117,14 +117,12 @@ B) Subtraction of two matrices
 c) Multiplication of two matrices
 d) Transpose of a matrix
 
-#NOT WORKING - ERROR IN LOOP WHILE PRINTING INVALID INPUT
+#make edit in INVALID INPUT condition in MENU
 def Addition():
     print("--------------------------------")
-    sum = 0
     for i in range(row):
         for j in range(col):
-            sum = sum + (mat1[i][j] + mat2[i][j])
-            print(sum, end=" ")
+            print(mat1[i][j] + mat2[i][j], end=" ")
         print()
     print("--------------------------------")
 
