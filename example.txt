@@ -588,7 +588,169 @@ int main(){
     return 0;
 }
 ---------------------------------------------------------------------------------------------
-8: 
+8: //Write C++ program for storing binary number using doubly linked lists. Write
+//functions
+//a) to compute 1„s and 2„s complement
+//b) add two binary numberS
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Node structure for the doubly linked list
+struct Node {
+    int data;
+    Node* prev;
+    Node* next;
+
+    Node(int value) : data(value), prev(nullptr), next(nullptr) {}
+};
+
+// Class to represent a binary number using a doubly linked list
+class BinaryNumber {
+private:
+    Node* head;
+    Node* tail;
+
+public:
+    BinaryNumber() : head(nullptr), tail(nullptr) {}
+
+    // Function to add a digit to the binary number
+    void append(int value) {
+        Node* newNode = new Node(value);
+        if (!head) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+    }
+
+    // Function to display the binary number
+    void display() {
+        Node* temp = head;
+        while (temp) {
+            cout << temp->data;
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+
+    // Function to compute 1's complement
+    BinaryNumber onesComplement() {
+        BinaryNumber result;
+        Node* temp = head;
+        while (temp) {
+            result.append(1 - temp->data);
+            temp = temp->next;
+        }
+        return result;
+    }
+
+    // Function to compute 2's complement
+    BinaryNumber twosComplement() {
+        BinaryNumber onesComp = onesComplement();
+        BinaryNumber result;
+        Node* temp = onesComp.tail;
+        int carry = 1;
+
+        while (temp || carry) {
+            int sum = carry;
+            if (temp) {
+                sum += temp->data;
+                temp = temp->prev;
+            }
+            result.append(sum % 2);
+            carry = sum / 2;
+        }
+
+        // Reverse the result since we are appending from LSB to MSB
+        result.reverse();
+        return result;
+    }
+
+    // Reverse the linked list (helper function for 2's complement)
+    void reverse() {
+        Node* current = head;
+        Node* prev = nullptr;
+        tail = head;
+
+        while (current) {
+            Node* next = current->next;
+            current->next = prev;
+            current->prev = next;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+    }
+
+    // Function to add two binary numbers
+    static BinaryNumber add(BinaryNumber& num1, BinaryNumber& num2) {
+        BinaryNumber result;
+        Node* p1 = num1.tail;
+        Node* p2 = num2.tail;
+        int carry = 0;
+
+        while (p1 || p2 || carry) {
+            int sum = carry;
+            if (p1) {
+                sum += p1->data;
+                p1 = p1->prev;
+            }
+            if (p2) {
+                sum += p2->data;
+                p2 = p2->prev;
+            }
+            result.append(sum % 2);
+            carry = sum / 2;
+        }
+
+        // Reverse the result since we are appending from LSB to MSB
+        result.reverse();
+        return result;
+    }
+};
+
+int main() {
+    BinaryNumber binary1, binary2;
+
+    // Example binary number 1: 1010
+    binary1.append(1);
+    binary1.append(0);
+    binary1.append(1);
+    binary1.append(0);
+
+    // Example binary number 2: 0111
+    binary2.append(0);
+    binary2.append(1);
+    binary2.append(1);
+    binary2.append(1);
+
+    cout << "Binary 1: ";
+    binary1.display();
+    cout << "Binary 2: ";
+    binary2.display();
+
+    // Compute and display 1's complement of binary1
+    BinaryNumber onesComp = binary1.onesComplement();
+    cout << "1's Complement of Binary 1: ";
+    onesComp.display();
+
+    // Compute and display 2's complement of binary1
+    BinaryNumber twosComp = binary1.twosComplement();
+    cout << "2's Complement of Binary 1: ";
+    twosComp.display();
+
+    // Add binary1 and binary2
+    BinaryNumber sum = BinaryNumber::add(binary1, binary2);
+    cout << "Sum of Binary 1 and Binary 2: ";
+    sum.display();
+
+    return 0;
+}
 ----------------------------------------------------------------------------------------------
 9:
 ----------------------------------------------------------------------------------------------
