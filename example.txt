@@ -752,7 +752,105 @@ int main() {
     return 0;
 }
 ----------------------------------------------------------------------------------------------
-9:
+9: #include <iostream>
+using namespace std;
+
+// Function to determine precedence of operators
+int precedence(char op) {
+    if (op == '+' || op == '-') return 1; // Lowest precedence
+    if (op == '*' || op == '/') return 2; // Higher precedence
+    return 0; // Invalid operator
+}
+
+// Function to convert infix expression to postfix
+void infixToPostfix(const string &infix, string &postfix) {
+    char stack[100]; // Simple array as a stack for operators
+    int top = -1;    // Stack pointer
+
+    for (char c : infix) {
+        // If the character is an operand, add it to output
+        if (isalnum(c)) {
+            postfix += c; // Add operand to postfix
+        }
+        // If the character is '(', push it to the stack
+        else if (c == '(') {
+            stack[++top] = c;
+        }
+        // If the character is ')', pop from stack until '('
+        else if (c == ')') {
+            while (top != -1 && stack[top] != '(') {
+                postfix += stack[top--]; // Pop from stack to output
+            }
+            top--; // Remove '(' from stack
+        }
+        // If the character is an operator
+        else {
+            while (top != -1 && precedence(stack[top]) >= precedence(c)) {
+                postfix += stack[top--]; // Pop from stack to output
+            }
+            stack[++top] = c; // Push current operator to stack
+        }
+    }
+
+    // Pop all remaining operators from the stack
+    while (top != -1) {
+        postfix += stack[top--]; // Pop from stack to output
+    }
+}
+
+// Function to evaluate a postfix expression
+int evaluatePostfix(const string &postfix) {
+    int operands[100]; // Array to hold operands
+    int top = -1;      // Pointer for the operands array
+
+    for (char c : postfix) {
+        // If the character is an operand (digit), push it to the array
+        if (isdigit(c)) {
+            operands[++top] = c - '0'; // Convert char to int and push
+        }
+        // If the character is an operator
+        else {
+            int right = operands[top--]; // Get right operand
+            int left = operands[top--];   // Get left operand
+
+            // Perform the operation and push the result back
+            switch (c) {
+                case '+':
+                    operands[++top] = left + right;
+                    break;
+                case '-':
+                    operands[++top] = left - right;
+                    break;
+                case '*':
+                    operands[++top] = left * right;
+                    break;
+                case '/':
+                    operands[++top] = left / right; // Assumes no division by zero
+                    break;
+            }
+        }
+    }
+
+    return operands[top]; // The final result is at the top of the operands array
+}
+
+// Main function
+int main() {
+    string infix;
+    string postfix;
+
+    cout << "Enter infix expression (e.g., A+B*C): ";
+    cin >> infix; // Read the infix expression
+
+    infixToPostfix(infix, postfix); // Convert infix to postfix
+    cout << "Postfix Expression: " << postfix << endl; // Display postfix expression
+
+    int result = evaluatePostfix(postfix); // Evaluate the postfix expression
+    cout << "Evaluation Result: " << result << endl; // Display evaluation result
+
+    return 0;
+}
+
 ----------------------------------------------------------------------------------------------
 10:
 ----------------------------------------------------------------------------------------------
